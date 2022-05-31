@@ -23,11 +23,12 @@ class Controller {
             text("Acceleration: " + entities[this.focusIndex].acceleration.mag(), 100, 120);
             text("Mass: " + entities[this.focusIndex].mass, 100, 140);
             text("Radius: " + entities[this.focusIndex].r, 100, 160);
-            //text("Kinetic Energy: " + (entities[this.focusIndex].mass*))
+            text("Kinetic Energy: " + (entities[this.focusIndex].mass*
+                Math.pow(entities[this.focusIndex].velocity.mag(),2)/2), 100, 180)
             text("Location: (X) " + Math.round(entities[this.focusIndex].position.x) + ", (Y) "
-             + Math.round(entities[this.focusIndex].position.y), 100, 180)
+             + Math.round(entities[this.focusIndex].position.y), 100, 200)
             text("Distance from center mass: " + this.distance(entities[this.focusIndex].position.x, 
-                entities[this.focusIndex].position.y, entities[0].position.x, entities[0].position.y), 100, 200)
+                entities[this.focusIndex].position.y, entities[0].position.x, entities[0].position.y), 100, 220)
         }
     }
 
@@ -38,6 +39,12 @@ class Controller {
             if (entities[i].contains(aimX, aimY)){
                 this.focusIndex = i;
             }
+        }
+    }
+
+    increaseVelocity(entities, amount){
+        if (this.focusIndex != -1){
+            entities[this.focusIndex].velocity.mult(amount);
         }
     }
 
