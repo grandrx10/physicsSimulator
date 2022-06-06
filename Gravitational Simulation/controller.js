@@ -67,7 +67,7 @@ class Controller {
 
     summonEntity(entities){
         entities.push(new Entity(this.xRange + windowWidth/2, 
-        this.yRange + windowHeight/2, randint(50, 300), randint(-1, 1), "S" + this.id));
+        this.yRange + windowHeight/2, randint(50, 300), 10, randint(-1, 1), "S" + this.id));
         this.id ++;
     }
 

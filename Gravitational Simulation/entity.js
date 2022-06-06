@@ -16,16 +16,18 @@ class Entity {
     }
 
     update(entities, camera, game){
-        this.velocity.add(this.acceleration);
-        this.position.add(this.velocity);
+        if (this.mass < 10000){
+            this.velocity.add(this.acceleration);
+            this.position.add(this.velocity);
+        }
 
-        if (game.time - this.time > 500){
+        if (game.time - this.time > 500/game.simulationSpeed){
             this.time = new Date();
             if (this.trail.length < game.trailLength){
                 this.trail.push({x: this.position.x, y: this.position.y});
             } else {
                 this.trail.push({x: this.position.x, y: this.position.y});
-                this.trail.splice(0, 1);
+                this.trail.splice(0, this.trail.length - game.trailLength);
             }
         }
 
@@ -60,7 +62,7 @@ class Entity {
 
     gravity(entities){
         this.acceleration = createVector();
-        for (var i = 0; i < entities.length; i ++){
+        for (var i = entities.length -1; i >= 0; i --){
             if (this != entities[i] && entities[i].mass >= 10){
                 this.attracted(entities[i])
             }
